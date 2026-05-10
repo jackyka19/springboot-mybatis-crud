@@ -1,0 +1,16 @@
+spring.application.name=XXXXX
+
+# 強制指定 Druid
+spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+
+# 注意：如果用的是 druid-spring-boot-3-starter，請統一用 spring.datasource.druid 前綴
+spring.datasource.druid.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.druid.url=jdbc:mysql://localhost:3306/XXXXX?serverTimezone=Asia/Taipei&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+spring.datasource.druid.username=XXXXX
+spring.datasource.druid.password=XXXXX
+
+spring.jackson.time-zone=GMT+8
+spring.jackson.date-format=yyyy-MM-dd
+
+# MyBatis-Plus
+mybatis-plus.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
