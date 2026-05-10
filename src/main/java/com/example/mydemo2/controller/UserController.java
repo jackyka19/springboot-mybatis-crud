@@ -1,5 +1,8 @@
 package com.example.mydemo2.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mydemo2.entity.User;
 import com.example.mydemo2.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +18,21 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/user")
-    public List<User> query(){
-        List<User> list = userMapper.find();
-        System.out.println(list);
-        return list;
+    @GetMapping("/user/findAll")
+    public List<User> find() {return userMapper.selectAllUserAndOrders();}
+
+    @GetMapping("/user/find")
+    public List<User> findByCond(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("username", "john");
+        return userMapper.selectList(queryWrapper);
     }
 
-    @PostMapping("/user")
-    public String save(User user){
-        int i = userMapper.insert(user);
-        if(i > 0){
-            return "插入成功";
-        }else{
-            return "插入失敗";
-        }
+    @GetMapping("/user/findByPage")
+    public IPage findByPage(){
+        Page<User> page = new Page<>(0,2);
+        IPage iPage = userMapper.selectPage(page,null);
+        return iPage;
     }
 
 
